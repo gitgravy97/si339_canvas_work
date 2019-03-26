@@ -33,15 +33,14 @@
 		ctx.fill();
 	}
 
-	// original HTML for this removed
-	function radioColor(color_selected){
-		console.log("color radio-selected: "+color_selected);
-		color=color_selected
-	}
-
 	function customColorChange(new_color){
 		console.log("New Color Value - Custom - Hex: ",new_color);
 		color=new_color;
+	}
+
+	function toggleClickToDraw(is_checked){
+		console.log("click_req toggled");
+		console.log(is_checked);
 	}
 
 	// Handles tracing mouse movement and changing draw-values accordingly
@@ -140,7 +139,7 @@
 		<label for="draw_color">&lt;-- Select New Draw Color</label>
 	</div>
 	<div>
-		<input type="checkbox" id="drag_or_click" value="#909090">
+		<input type="checkbox" id="drag_or_click" value="#909090" onchange="toggleClickToDraw(checked)">
 		<label for="draw_color">&lt;-- Toggle click-to-draw</label>
 	</div>
 </body>
