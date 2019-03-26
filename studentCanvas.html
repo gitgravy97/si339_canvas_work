@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Canvas Example</title>
+	<style type="text/css">
+		canvas{
+			border: 1px solid black;
+		}
+	</style>
+</head>
+<body>
+	<canvas id="canvas" width="500" height="500">
+	(Canvas Alt-Text)
+</canvas>
+
+<script>
+	var canvas = document.querySelector('canvas');
+	var ctx = canvas.getContext('2d');
+
+	var x = 0;
+	var y = 0;
+	var radius = 20;
+	var color = 'red';
+
+	function drawCircle(){
+		ctx.beginPath();
+		ctx.fillStyle = color;
+		ctx.arc(x,y,radius,0,2*Math.PI);
+		ctx.fill();
+	}
+
+	window.addEventListener('mousemove', function(e) {
+		//console.log(e.pageX);
+		//console.log(e.pageY);
+		x = e.pageX;
+		y = e.pageY;
+		drawCircle();
+	})
+
+	// e.keycode
+	window.addEventListener('keydown', function(e) {
+		//console.log("event listener triggered: keypress");
+		console.log(e)
+		//console.log(e.key)
+		
+		// I don't quite know why, but there's something I just love about Switch statements
+		// they just have a nice structure for catching anything that should align with with regular,
+		// pretty-exact responses
+
+		switch(e.key){
+			// Case Set: Color Changing
+			case "b":
+				console.log("Case_Blue, my dude");
+				color="blue";
+				break;
+
+			case "g":
+				console.log("Case_Green, my dude");
+				color="green";
+				break;
+
+			case "r":
+				console.log("Case_Red, my dude");
+				color="red";
+				break;
+
+			case "y":
+				console.log("Case_Yellow, my dude");
+				color="yellow";
+				break;
+
+			// Unique Case: Space-to-Clear-Canvas
+			case " ":
+				console.log("Why space-race when you can trigger the Space_Case?");
+				ctx.clearRect(0,0,canvas.width, canvas.height);
+				break;
+		}
+	})
+</script>
+
+<!--	<br><input type="file" id="myFile" size="50" onchange="myFunction()"><br>		-->
+
+</body>
+</html>
+
+<!--
+						Requirements
+	1: 	Needs 80% Sizing				5:	Done
+	2: 	Done							6:	Not Done
+	3: 	Not Done						7:	Not Done
+	4:	Not Done						8:	Not Done
+
+1) Create a canvas element with a border.
+The canvas should be about 80% the width and 80% height of the screen.
+If the window is dynamically resized, you do not need to resize the canvas,
+but if I use Inspect element to switchto different device size it should.
+
+3) Alternate the pen colors by hitting the pressing the "b" for blue, the "g" for green,
+the "r" for red, and the "y" for yellow.
+
+4) Use the up (larger) and down (smaller) arrow keys to change the radius of the pensize.
+Make sure that the pen can never be set to 0 or less.
+
+6) React to touch events the same way you react to the mouse movements.
+
+7) On a mobile device changing the orientation should clear and resize the canvas.
+This may be tricky so do what you need to do to make it work. (It may be more dramatic than "clearing" the canvas.
+
+8) Add a color picker that allows the user to choose a different color.
+This won't work in Safari (on mobile), thats okay.
+-->
