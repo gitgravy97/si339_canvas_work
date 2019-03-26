@@ -6,13 +6,14 @@
 	<style type="text/css">
 		canvas{
 			border: 1px solid black;
+			/* These screw up mouse and touch tracking... hmm... 	height: 80vh;	width: 80vw; */
 		}
 	</style>
 </head>
 <body>
 	<canvas id="canvas" width="500" height="500">
-	(Canvas Alt-Text)
-</canvas>
+		(Canvas Alt-Text)
+	</canvas>
 
 <script>
 	var canvas = document.querySelector('canvas');
@@ -22,6 +23,8 @@
 	var y = 0;
 	var radius = 5;
 	var color = 'blue';
+
+	var click_to_draw = false;
 
 	function drawCircle(){
 		ctx.beginPath();
@@ -34,6 +37,11 @@
 	function radioColor(color_selected){
 		console.log("color radio-selected: "+color_selected);
 		color=color_selected
+	}
+
+	function customColorChange(new_color){
+		console.log("New Color Value - Custom - Hex: ",new_color);
+		color=new_color;
 	}
 
 	// Handles tracing mouse movement and changing draw-values accordingly
@@ -117,19 +125,24 @@
 			// It seems like Client and Page are pretty similar in this case but we'd want Client
 			// because it'd correspond with their perspective when trying to manipulate the canvas
 
-		var touch_main = e.touches[0]
+		var touch_main = e.touches[0];
 		console.log("x:", touch_main.clientX, " - ", "y:", touch_main.clientY);
-		x = touch_main.clientX
-		y = touch_main.clientY
+		x = touch_main.clientX;
+		y = touch_main.clientY;
 		drawCircle();
 	})
 
 </script>
 
-
-
 <!--	<br><input type="file" id="myFile" size="50" onchange="myFunction()"><br>		-->
-
+	<div>
+		<input type="color" id="color_selector" value="#909090" onchange="customColorChange(value)">
+		<label for="draw_color">&lt;-- Select New Draw Color</label>
+	</div>
+	<div>
+		<input type="checkbox" id="drag_or_click" value="#909090">
+		<label for="draw_color">&lt;-- Toggle click-to-draw</label>
+	</div>
 </body>
 </html>
 
