@@ -41,7 +41,7 @@
 	// e.keycode
 	window.addEventListener('keydown', function(e) {
 		//console.log("event listener triggered: keypress");
-		console.log(e)
+		//console.log(e)
 		//console.log(e.key)
 		
 		// I don't quite know why, but there's something I just love about Switch statements
@@ -73,11 +73,23 @@
 			// Unique Case: Space-to-Clear-Canvas
 			case " ":
 				console.log("Why space-race when you can trigger the Space_Case?");
+				// Implementation Funfact: clearRect just draws a rectangle of RGB_A (0,0,0,0)
 				ctx.clearRect(0,0,canvas.width, canvas.height);
 				break;
 		}
 	})
+
+	function radio_color(color_selected){
+		console.log("color radio-selected: "+color_selected);
+		color=color_selected
+	}
 </script>
+<form>
+	<input type="radio" name="color" value="blue" onclick="radio_color(value)">Blue<br>
+	<input type="radio" name="color" value="Green" onclick="radio_color(value)">Green<br>
+	<input type="radio" name="color" value="Red" onclick="radio_color(value)"> Red<br>  
+	<input type="radio" name="color" value="Yellow" onclick="radio_color(value)"> Yellow<br>  
+</form>
 
 <!--	<br><input type="file" id="myFile" size="50" onchange="myFunction()"><br>		-->
 
@@ -94,7 +106,7 @@
 1) Create a canvas element with a border.
 The canvas should be about 80% the width and 80% height of the screen.
 If the window is dynamically resized, you do not need to resize the canvas,
-but if I use Inspect element to switchto different device size it should.
+but if I use Inspect element to switch to different device size it should.
 
 3) Alternate the pen colors by hitting the pressing the "b" for blue, the "g" for green,
 the "r" for red, and the "y" for yellow.
