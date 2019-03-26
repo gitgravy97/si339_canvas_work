@@ -29,7 +29,12 @@
 		ctx.arc(x,y,radius,0,2*Math.PI);
 		ctx.fill();
 	}
+	function radioColor(color_selected){
+		console.log("color radio-selected: "+color_selected);
+		color=color_selected
+	}
 
+	// Handles tracing mouse movement and changing draw-values accordingly
 	window.addEventListener('mousemove', function(e) {
 		//console.log(e.pageX);
 		//console.log(e.pageY);
@@ -38,16 +43,13 @@
 		drawCircle();
 	})
 
-	// e.keycode
+	// Handles response to key depression, coordinates coloration and canvas-reset responses
 	window.addEventListener('keydown', function(e) {
 		//console.log("event listener triggered: keypress");
 		//console.log(e)
 		//console.log(e.key)
 		
-		// I don't quite know why, but there's something I just love about Switch statements
-		// they just have a nice structure for catching anything that should align with with regular,
-		// pretty-exact responses
-
+		// The readability of switch cases <3
 		switch(e.key){
 			// Case Set: Color Changing
 			case "b":
@@ -79,16 +81,40 @@
 		}
 	})
 
-	function radio_color(color_selected){
-		console.log("color radio-selected: "+color_selected);
-		color=color_selected
-	}
+	window.addEventListener('touchmove', function(e) {
+		//console.log("touch_move");
+		//console.log(e);
+
+		// So, touch-event for touchmove will have a load of properties. One is "touches", a list
+		// that seemingly traces the different touch-inputs. 
+
+		// e.touches[0] would correspond with the first vein of touch-input
+		// e.touches[each] should have a few attributes including pageX/screenX/clientX
+		// as well as those values with Y, etc.
+
+		// https://stackoverflow.com/questions/6073505/what-is-the-difference-between-screenx-y-clientx-y-and-pagex-y
+			// PageX/Y	= Relative to top-left corner of rendered page
+			// ClientX/Y = Relative to top-left corner of visible on-screen page
+			// ScreenX/Y = Relative to top-left corner of monitor
+
+			// It seems like Client and Page are pretty similar in this case but we'd want Client
+			// because it'd correspond with their perspective when trying to manipulate the canvas
+
+		var touch_main = e.touches[0]
+		console.log("x:", touch_main.clientX, " - ", "y:", touch_main.clientY);
+		x = touch_main.clientX
+		y = touch_main.clientY
+		drawCircle();
+	})
+
 </script>
+
 <form>
-	<input type="radio" name="color" value="blue" onclick="radio_color(value)">Blue<br>
-	<input type="radio" name="color" value="Green" onclick="radio_color(value)">Green<br>
-	<input type="radio" name="color" value="Red" onclick="radio_color(value)"> Red<br>  
-	<input type="radio" name="color" value="Yellow" onclick="radio_color(value)"> Yellow<br>  
+	<input type="radio" name="color" value="Blue" onclick="radioColor(value)">Blue<br>
+	<input type="radio" name="color" value="Green" onclick="radioColor(value)">Green<br>
+	<!-- NTS: checked="checked" changes default-selected radio value from first-listed to that-->
+	<input type="radio" name="color" value="Red" onclick="radioColor(value)" checked="checked"> Red<br>  
+	<input type="radio" name="color" value="Yellow" onclick="radioColor(value)"> Yellow<br>  
 </form>
 
 <!--	<br><input type="file" id="myFile" size="50" onchange="myFunction()"><br>		-->
@@ -100,21 +126,16 @@
 						Requirements
 	1: 	Needs 80% Sizing				5:	Done
 	2: 	Done							6:	Not Done
-	3: 	Not Done						7:	Not Done
-	4:	Not Done						8:	Not Done
+	3: 	Done							7:	Not Done
+	4:	Not Done						8:	??? Seems to work, need to implement #6 first to test further
 
 1) Create a canvas element with a border.
 The canvas should be about 80% the width and 80% height of the screen.
 If the window is dynamically resized, you do not need to resize the canvas,
 but if I use Inspect element to switch to different device size it should.
 
-3) Alternate the pen colors by hitting the pressing the "b" for blue, the "g" for green,
-the "r" for red, and the "y" for yellow.
-
 4) Use the up (larger) and down (smaller) arrow keys to change the radius of the pensize.
 Make sure that the pen can never be set to 0 or less.
-
-6) React to touch events the same way you react to the mouse movements.
 
 7) On a mobile device changing the orientation should clear and resize the canvas.
 This may be tricky so do what you need to do to make it work. (It may be more dramatic than "clearing" the canvas.
