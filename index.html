@@ -20,8 +20,8 @@
 
 	var x = 0;
 	var y = 0;
-	var radius = 20;
-	var color = 'red';
+	var radius = 5;
+	var color = 'blue';
 
 	function drawCircle(){
 		ctx.beginPath();
@@ -47,7 +47,7 @@
 	window.addEventListener('keydown', function(e) {
 		//console.log("event listener triggered: keypress");
 		//console.log(e)
-		//console.log(e.key)
+		console.log(e.key)
 		
 		// The readability of switch cases <3
 		switch(e.key){
@@ -72,6 +72,21 @@
 				color="yellow";
 				break;
 
+			// Draw-Radius Cases
+			case "ArrowUp":
+				console.log("Case_ArrowUp: adjusting radius to: ",radius+1);
+				radius += 1;
+				break;
+			case "ArrowDown":
+				console.log("Case_ArrowDown: adjusting radius to: ",radius-1);
+				if(radius>1){
+					radius -=1;
+				}
+				else{
+					console.log("Would adjust to radius of zero; this is not permitted.")
+					console.log("Radial adjustment aborted.")
+				}
+				break;
 			// Unique Case: Space-to-Clear-Canvas
 			case " ":
 				console.log("Why space-race when you can trigger the Space_Case?");
@@ -110,10 +125,9 @@
 </script>
 
 <form>
-	<input type="radio" name="color" value="Blue" onclick="radioColor(value)">Blue<br>
+	<input type="radio" name="color" value="Blue" onclick="radioColor(value)" checked="checked">Blue<br>
 	<input type="radio" name="color" value="Green" onclick="radioColor(value)">Green<br>
-	<!-- NTS: checked="checked" changes default-selected radio value from first-listed to that-->
-	<input type="radio" name="color" value="Red" onclick="radioColor(value)" checked="checked"> Red<br>  
+	<input type="radio" name="color" value="Red" onclick="radioColor(value)"> Red<br>  
 	<input type="radio" name="color" value="Yellow" onclick="radioColor(value)"> Yellow<br>  
 </form>
 
