@@ -24,8 +24,6 @@
 	var radius = 5;
 	var color = 'blue';
 
-	var click_to_draw = false;
-
 	function drawCircle(){
 		ctx.beginPath();
 		ctx.fillStyle = color;
@@ -36,11 +34,6 @@
 	function customColorChange(new_color){
 		console.log("New Color Value - Custom - Hex: ",new_color);
 		color=new_color;
-	}
-
-	function toggleClickToDraw(is_checked){
-		console.log("click_req toggled");
-		console.log(is_checked);
 	}
 
 	// Handles tracing mouse movement and changing draw-values accordingly
@@ -56,7 +49,7 @@
 	window.addEventListener('keydown', function(e) {
 		//console.log("event listener triggered: keypress");
 		//console.log(e)
-		console.log(e.key)
+		//console.log(e.key)
 		
 		// The readability of switch cases <3
 		switch(e.key){
@@ -137,10 +130,6 @@
 	<div>
 		<input type="color" id="color_selector" value="#909090" onchange="customColorChange(value)">
 		<label for="draw_color">&lt;-- Select New Draw Color</label>
-	</div>
-	<div>
-		<input type="checkbox" id="drag_or_click" value="#909090" onchange="toggleClickToDraw(checked)">
-		<label for="draw_color">&lt;-- Toggle click-to-draw</label>
 	</div>
 </body>
 </html>
