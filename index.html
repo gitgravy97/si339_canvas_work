@@ -29,6 +29,8 @@
 		ctx.arc(x,y,radius,0,2*Math.PI);
 		ctx.fill();
 	}
+
+	// original HTML for this removed
 	function radioColor(color_selected){
 		console.log("color radio-selected: "+color_selected);
 		color=color_selected
@@ -124,12 +126,7 @@
 
 </script>
 
-<form>
-	<input type="radio" name="color" value="Blue" onclick="radioColor(value)" checked="checked">Blue<br>
-	<input type="radio" name="color" value="Green" onclick="radioColor(value)">Green<br>
-	<input type="radio" name="color" value="Red" onclick="radioColor(value)"> Red<br>  
-	<input type="radio" name="color" value="Yellow" onclick="radioColor(value)"> Yellow<br>  
-</form>
+
 
 <!--	<br><input type="file" id="myFile" size="50" onchange="myFunction()"><br>		-->
 
@@ -138,22 +135,15 @@
 
 <!--
 						Requirements
-	1: 	Needs 80% Sizing				5:	Done
-	2: 	Done							6:	Not Done
-	3: 	Done							7:	Not Done
-	4:	Not Done						8:	??? Seems to work, need to implement #6 first to test further
 
 1) Create a canvas element with a border.
 The canvas should be about 80% the width and 80% height of the screen.
 If the window is dynamically resized, you do not need to resize the canvas,
 but if I use Inspect element to switch to different device size it should.
 
-4) Use the up (larger) and down (smaller) arrow keys to change the radius of the pensize.
-Make sure that the pen can never be set to 0 or less.
-
 7) On a mobile device changing the orientation should clear and resize the canvas.
 This may be tricky so do what you need to do to make it work. (It may be more dramatic than "clearing" the canvas.
 
-8) Add a color picker that allows the user to choose a different color.
+8) Add a color picker that allows the user to choose a custom color.
 This won't work in Safari (on mobile), thats okay.
 -->
