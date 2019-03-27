@@ -124,6 +124,11 @@
 		drawCircle();
 	})
 
+	// Handles orientation shift
+	window.addEventListener('deviceorientation', function(e) {
+		canvas.style.display = "none";
+	})
+
 </script>
 
 <!--	<br><input type="file" id="myFile" size="50" onchange="myFunction()"><br>		-->
@@ -144,7 +149,4 @@ but if I use Inspect element to switch to different device size it should.
 
 7) On a mobile device changing the orientation should clear and resize the canvas.
 This may be tricky so do what you need to do to make it work. (It may be more dramatic than "clearing" the canvas.
-
-8) Add a color picker that allows the user to choose a custom color.
-This won't work in Safari (on mobile), thats okay.
 -->
