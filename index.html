@@ -39,7 +39,7 @@
 		canvas.height = 0.80 * window.innerHeight;
 	})
 	
-	// Handles orientation shift
+	// Handles orientation shift 
 	window.addEventListener('orientationchange', function(e) {
 		// This actually seems to be pretty sufficient
 		// The listener for Resize handles rescaling, so this just needs to purge ye old canvas
@@ -135,8 +135,6 @@
 		
 		x = touch_main.clientX;
 		y = touch_main.clientY;
-		//x = e.pageX;
-		//y = e.pageY;
 		drawCircle();
 	})
 
