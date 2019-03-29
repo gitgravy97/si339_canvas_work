@@ -19,6 +19,9 @@
 	var canvas = document.querySelector('canvas');
 	var ctx = canvas.getContext('2d');
 
+	canvas.width = 0.80 * window.innerWidth;
+	canvas.height = 0.80 * window.innerHeight;
+
 	var x = 0;
 	var y = 0;
 	var radius = 5;
@@ -31,17 +34,16 @@
 		ctx.fill();
 	}
 
-	/*
-	function customColorChange(new_color){
-		console.log("New Color Value - Custom - Hex: ",new_color);
-		color=new_color;
-	}
-	*/
-
-	window.addEventListener("input", function(e) {
-		//console.log("BOOM triggered")
-		//console.log(e.path[0].value)
-		color=e.path[0].value
+	// Handles canvas resizing, no need to actually use the "e"
+	window.addEventListener('resize', function(){
+		canvas.width = 0.80 * window.innerWidth;
+		canvas.height = 0.80 * window.innerHeight;
+	})
+	
+	// Handles orientation shift
+	window.addEventListener('deviceorientation', function(e) {
+		//canvas.style.display = "none";
+		ctx.clearRect(0,0,canvas.width, canvas.height);
 	})
 
 	// Handles tracing mouse movement and changing draw-values accordingly
@@ -51,6 +53,13 @@
 		x = e.pageX;
 		y = e.pageY;
 		drawCircle();
+	})
+
+	// Handles the custom-color selection
+	window.addEventListener("input", function(e) {
+		//console.log("Input_Trigger")
+		//console.log(e.path[0].value)
+		color=e.path[0].value
 	})
 
 	// Handles response to key depression, coordinates coloration and canvas-reset responses
@@ -63,22 +72,22 @@
 		switch(e.key){
 			// Case Set: Color Changing
 			case "b":
-				console.log("Case_Blue, my dude");
+				console.log("%c Case_Blue ", "background: #000000 ; color: #afeeee");
 				color="blue";
 				break;
 
 			case "g":
-				console.log("Case_Green, my dude");
+				console.log("%c Case_Green ", "background: #000000 ; color: #00ff00");
 				color="green";
 				break;
 
 			case "r":
-				console.log("Case_Red, my dude");
+				console.log("%c Case_Red ", "background: #000000 ; color: #ff0000");
 				color="red";
 				break;
 
 			case "y":
-				console.log("Case_Yellow, my dude");
+				console.log("%c Case_Yellow ", "background: #000000 ; color: #ffff00");
 				color="yellow";
 				break;
 
@@ -99,9 +108,18 @@
 				break;
 			// Unique Case: Space-to-Clear-Canvas
 			case " ":
-				console.log("Why space-race when you can trigger the Space_Case?");
+				console.log("%c You've Triggered The Space_Case ", "background: #000000 ; color: #ffffff");
 				// Implementation Funfact: clearRect just draws a rectangle of RGB_A (0,0,0,0)
 				ctx.clearRect(0,0,canvas.width, canvas.height);
+				break;
+			
+			// Just testing something
+			case "9":
+				console.log("Trigger_Case9");
+				var page_width = window.innerWidth;
+				var page_height = window.innerHeight;
+				console.log("page_height = ",page_height);
+				console.log("page_width = ",page_width)
 				break;
 		}
 	})
@@ -132,17 +150,9 @@
 		drawCircle();
 	})
 
-	// Handles orientation shift
-	window.addEventListener('deviceorientation', function(e) {
-		//canvas.style.display = "none";
-		ctx.clearRect(0,0,canvas.width, canvas.height);
-	})
-
 </script>
-
-<!--	<br><input type="file" id="myFile" size="50" onchange="myFunction()"><br>		-->
 	<div>
-		<input type="color" id="color_selector" value="#909090" /*onchange="customColorChange(value)"*/>
+		<input type="color" id="color_selector" value="#909090">
 		<label for="draw_color">&lt;-- Select New Draw Color</label>
 	</div>
 </body>
@@ -150,12 +160,6 @@
 
 <!--
 						Requirements
-
-1) Create a canvas element with a border.
-The canvas should be about 80% the width and 80% height of the screen.
-If the window is dynamically resized, you do not need to resize the canvas,
-but if I use Inspect element to switch to different device size it should.
-
 7) On a mobile device changing the orientation should clear and resize the canvas.
 This may be tricky so do what you need to do to make it work. (It may be more dramatic than "clearing" the canvas.
 -->
