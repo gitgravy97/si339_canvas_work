@@ -132,8 +132,11 @@
 
 		var touch_main = e.touches[0];
 		//console.log("x:", touch_main.clientX, " - ", "y:", touch_main.clientY);
-		x = touch_main.clientX;
-		y = touch_main.clientY;
+		
+		//x = touch_main.clientX;
+		//y = touch_main.clientY;
+		x = e.pageX;
+		y = e.pageY;
 		drawCircle();
 	})
 
