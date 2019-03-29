@@ -31,10 +31,18 @@
 		ctx.fill();
 	}
 
+	/*
 	function customColorChange(new_color){
 		console.log("New Color Value - Custom - Hex: ",new_color);
 		color=new_color;
 	}
+	*/
+
+	window.addEventListener("input", function(e) {
+		//console.log("BOOM triggered")
+		//console.log(e.path[0].value)
+		color=e.path[0].value
+	})
 
 	// Handles tracing mouse movement and changing draw-values accordingly
 	window.addEventListener('mousemove', function(e) {
@@ -126,14 +134,15 @@
 
 	// Handles orientation shift
 	window.addEventListener('deviceorientation', function(e) {
-		canvas.style.display = "none";
+		//canvas.style.display = "none";
+		ctx.clearRect(0,0,canvas.width, canvas.height);
 	})
 
 </script>
 
 <!--	<br><input type="file" id="myFile" size="50" onchange="myFunction()"><br>		-->
 	<div>
-		<input type="color" id="color_selector" value="#909090" onchange="customColorChange(value)">
+		<input type="color" id="color_selector" value="#909090" /*onchange="customColorChange(value)"*/>
 		<label for="draw_color">&lt;-- Select New Draw Color</label>
 	</div>
 </body>
