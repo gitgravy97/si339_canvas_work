@@ -130,7 +130,7 @@
 		// 		It seems like Client and Page are pretty similar in this case but we'd want Client
 		// 		because it'd correspond with their perspective when trying to manipulate the canvas
 
-		var touch_main = e.touches[0];
+		//var touch_main = e.touches[0];
 		//console.log("x:", touch_main.clientX, " - ", "y:", touch_main.clientY);
 		
 		//x = touch_main.clientX;
@@ -138,7 +138,9 @@
 		x = e.pageX;
 		y = e.pageY;
 		drawCircle();
-	})
+
+		event.preventDefault();
+	}, false)
 
 </script>
 	<div>
