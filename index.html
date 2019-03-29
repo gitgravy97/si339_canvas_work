@@ -6,7 +6,6 @@
 	<style type="text/css">
 		canvas{
 			border: 1px solid black;
-			/* These screw up mouse and touch tracking... hmm... 	height: 80vh;	width: 80vw; */
 		}
 	</style>
 </head>
@@ -42,14 +41,14 @@
 	
 	// Handles orientation shift
 	window.addEventListener('deviceorientation', function(e) {
-		//canvas.style.display = "none";
+		// This actually seems to be pretty sufficient
+		// The listener for Resize handles rescaling, so this just needs to purge ye old canvas
 		ctx.clearRect(0,0,canvas.width, canvas.height);
 	})
 
 	// Handles tracing mouse movement and changing draw-values accordingly
 	window.addEventListener('mousemove', function(e) {
-		//console.log(e.pageX);
-		//console.log(e.pageY);
+		//console.log(e.pageX);				//console.log(e.pageY);
 		x = e.pageX;
 		y = e.pageY;
 		drawCircle();
@@ -57,16 +56,14 @@
 
 	// Handles the custom-color selection
 	window.addEventListener("input", function(e) {
-		//console.log("Input_Trigger")
-		//console.log(e.path[0].value)
+		//console.log("Input_Trigger")		//console.log(e.path[0].value)
 		color=e.path[0].value
 	})
 
 	// Handles response to key depression, coordinates coloration and canvas-reset responses
 	window.addEventListener('keydown', function(e) {
 		//console.log("event listener triggered: keypress");
-		//console.log(e)
-		//console.log(e.key)
+		//console.log(e)					//console.log(e.key)
 		
 		// The readability of switch cases <3
 		switch(e.key){
@@ -112,21 +109,11 @@
 				// Implementation Funfact: clearRect just draws a rectangle of RGB_A (0,0,0,0)
 				ctx.clearRect(0,0,canvas.width, canvas.height);
 				break;
-			
-			// Just testing something
-			case "9":
-				console.log("Trigger_Case9");
-				var page_width = window.innerWidth;
-				var page_height = window.innerHeight;
-				console.log("page_height = ",page_height);
-				console.log("page_width = ",page_width)
-				break;
 		}
 	})
 
 	window.addEventListener('touchmove', function(e) {
-		//console.log("touch_move");
-		//console.log(e);
+		//console.log("touch_move");			//console.log(e);
 
 		// So, touch-event for touchmove will have a load of properties. One is "touches", a list
 		// that seemingly traces the different touch-inputs. 
@@ -136,12 +123,12 @@
 		// as well as those values with Y, etc.
 
 		// https://stackoverflow.com/questions/6073505/what-is-the-difference-between-screenx-y-clientx-y-and-pagex-y
-			// PageX/Y	= Relative to top-left corner of rendered page
-			// ClientX/Y = Relative to top-left corner of visible on-screen page
-			// ScreenX/Y = Relative to top-left corner of monitor
+		// 		PageX/Y	= Relative to top-left corner of rendered page
+		// 		ClientX/Y = Relative to top-left corner of visible on-screen page
+		// 		ScreenX/Y = Relative to top-left corner of monitor
 
-			// It seems like Client and Page are pretty similar in this case but we'd want Client
-			// because it'd correspond with their perspective when trying to manipulate the canvas
+		// 		It seems like Client and Page are pretty similar in this case but we'd want Client
+		// 		because it'd correspond with their perspective when trying to manipulate the canvas
 
 		var touch_main = e.touches[0];
 		console.log("x:", touch_main.clientX, " - ", "y:", touch_main.clientY);
@@ -157,9 +144,3 @@
 	</div>
 </body>
 </html>
-
-<!--
-						Requirements
-7) On a mobile device changing the orientation should clear and resize the canvas.
-This may be tricky so do what you need to do to make it work. (It may be more dramatic than "clearing" the canvas.
--->
