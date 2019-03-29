@@ -40,7 +40,7 @@
 	})
 	
 	// Handles orientation shift
-	window.addEventListener('deviceorientation', function(e) {
+	window.addEventListener('orientationchange', function(e) {
 		// This actually seems to be pretty sufficient
 		// The listener for Resize handles rescaling, so this just needs to purge ye old canvas
 		ctx.clearRect(0,0,canvas.width, canvas.height);
@@ -130,17 +130,15 @@
 		// 		It seems like Client and Page are pretty similar in this case but we'd want Client
 		// 		because it'd correspond with their perspective when trying to manipulate the canvas
 
-		//var touch_main = e.touches[0];
+		var touch_main = e.touches[0];
 		//console.log("x:", touch_main.clientX, " - ", "y:", touch_main.clientY);
 		
-		//x = touch_main.clientX;
-		//y = touch_main.clientY;
-		x = e.pageX;
-		y = e.pageY;
+		x = touch_main.clientX;
+		y = touch_main.clientY;
+		//x = e.pageX;
+		//y = e.pageY;
 		drawCircle();
-
-		e.preventDefault();
-	}, false)
+	})
 
 </script>
 	<div>
